@@ -8,6 +8,14 @@ class window.App extends Backbone.Model
     @get('playerHand').on "stand", (->
       @dealerTurn()
       return), this
+    # listen for any busted event
+      # call declare winner
+    @get('playerHand').on "busted", (->
+      @declareWinner("Player", "dealer")
+      return), this
+    @get('dealerHand').on "busted", (->
+      @declareWinner("Dealer", "player")
+      return), this
     return
 
 # // method dealer turn
@@ -16,7 +24,19 @@ class window.App extends Backbone.Model
     @get('dealerHand').at(0).flip()
     while @get('dealerHand').minScore() < 17
       @get('dealerHand').hit()
-#   // if over 17
+    if @get('dealerHand').minScore() <= 21 then @declareWinner() else return
+#
+# // if over 17
 #     // if over 21 player win
 #     // else stand and determine winner
 #   // else hit and recurse
+  declareWinner: (busted=false, winner=false) ->
+    # did someone bust? other player wins
+    if busted
+      console.log "#{busted} busted, #{winner} wins!"
+      # if busted is
+    else
+      # declare winner
+      dealScore = @get('dealerHand').minScore()
+      playScore = @get('playerHand').minScore()
+      if dealScore > playScore then console.log 'Dealer wins!' else console.log 'Player wins!'
