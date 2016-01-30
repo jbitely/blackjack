@@ -2,6 +2,8 @@ class window.Hand extends Backbone.Collection
   model: Card
 
   initialize: (array, @deck, @isDealer) ->
+    @.on 'add', -> if @.minScore() > 21
+       if @isDealer then alert "Dealer busted." else alert "Player busted."
 
   hit: ->
     @add(@deck.pop())
@@ -20,4 +22,5 @@ class window.Hand extends Backbone.Collection
     # when there is an ace, it offers you two scores - the original score, and score + 10.
     [@minScore(), @minScore() + 10 * @hasAce()]
 
+#  bustCheck: ->
 

@@ -1,0 +1,16 @@
+// safe scratchpad
+
+// deal hands
+// player turn
+  // hit or stand?
+    // if hit call hit
+       // if over 21 dealer wins
+       // recurse hit or stand
+    // if stand dealer reveals and start turn
+
+// dealer turn
+  // if over 17
+    // if over 21 player win
+    // else stand and determine winner
+  // else hit and recurse
+
