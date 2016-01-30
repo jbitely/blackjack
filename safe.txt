@@ -9,6 +9,7 @@
     // if stand dealer reveals and start turn
 
 // dealer turn
+  // flip card
   // if over 17
     // if over 21 player win
     // else stand and determine winner
