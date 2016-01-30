@@ -13,6 +13,7 @@ class window.App extends Backbone.Model
       @declareWinner("Player", "dealer")
       return), this
     @get('playerHand').on "blackjack", (->
+      @.trigger 'blackjack'
       @declareWinner(false, "Player", true)
       return), this
     @get('dealerHand').on "busted", (->
