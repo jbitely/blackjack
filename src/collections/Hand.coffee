@@ -2,9 +2,9 @@ class window.Hand extends Backbone.Collection
   model: Card
 
   initialize: (array, @deck, @isDealer) ->
-    @.on 'add', -> if @.minScore() > 21
-       # if @isDealer then alert "Dealer busted." else alert "Player busted."
-       @.busted()
+    @.on 'add', ->
+      if @.minScore() > 21 then @.busted()
+      if !@isDealer and @.minScore() is 21 then @blackJack()
 
   hit: ->
     @add(@deck.pop())
@@ -28,3 +28,6 @@ class window.Hand extends Backbone.Collection
 
   busted: ->
     @.trigger "busted"
+
+  blackJack: ->
+    @.trigger "blackjack"
