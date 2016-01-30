@@ -6,6 +6,17 @@ class window.App extends Backbone.Model
     @set 'playerHand', deck.dealPlayer()
     @set 'dealerHand', deck.dealDealer()
     @get('playerHand').on "stand", (->
-      @get('dealerHand').at(0).flip()
+      @dealerTurn()
       return), this
     return
+
+# // method dealer turn
+  dealerTurn: ->
+#   // flip card
+    @get('dealerHand').at(0).flip()
+    while @get('dealerHand').minScore() < 17
+      @get('dealerHand').hit()
+#   // if over 17
+#     // if over 21 player win
+#     // else stand and determine winner
+#   // else hit and recurse

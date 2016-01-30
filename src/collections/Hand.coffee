@@ -24,4 +24,3 @@ class window.Hand extends Backbone.Collection
 
   stand: ->
     @.trigger "stand"
-    console.log('standing')
