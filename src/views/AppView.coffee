@@ -10,6 +10,11 @@ class window.AppView extends Backbone.View
     'click .stand-button': -> @model.get('playerHand').stand()
 
   initialize: ->
+    #listen for dealerturn
+    @.listenTo(@.model, 'dealerturn busted', ->
+      console.log 'heard player stand'
+      console.log @$el
+      @$el.off "click .hit-button")
     @render()
 
   render: ->

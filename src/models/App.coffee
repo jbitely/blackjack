@@ -9,6 +9,7 @@ class window.App extends Backbone.Model
       @dealerTurn()
       return), this
     @get('playerHand').on "busted", (->
+      @.trigger 'busted'
       @declareWinner("Player", "dealer")
       return), this
     @get('playerHand').on "blackjack", (->
@@ -21,16 +22,18 @@ class window.App extends Backbone.Model
 
 # // method dealer turn
   dealerTurn: ->
+#   trigger dealerturn event
+    @.trigger('dealerturn')
 #   // flip card
     @get('dealerHand').at(0).flip()
     while @get('dealerHand').minScore() < 17
       @get('dealerHand').hit()
     if @get('dealerHand').minScore() <= 21 then @declareWinner() else return
 #
-# // if over 17
-#     // if over 21 player win
-#     // else stand and determine winner
-#   // else hit and recurse
+# if over 17
+#  if over 21 player win
+#  else stand and determine winner
+#  else hit and recurse
   declareWinner: (busted=false, winner=false, blackjack=false) ->
     if blackjack
       console.log "Blackjack! #{winner} wins!"
