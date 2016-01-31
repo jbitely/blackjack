@@ -3,6 +3,7 @@ class window.AppView extends Backbone.View
     <button class="hit-button">Hit</button> <button class="stand-button">Stand</button>
     <div class="player-hand-container"></div>
     <div class="dealer-hand-container"></div>
+    <div class="result"></div>
   '
 
   events:
@@ -13,6 +14,23 @@ class window.AppView extends Backbone.View
     #listen for dealerturn
     @.listenTo(@.model, 'dealerturn busted blackjack', ->
       @$el.off "click .hit-button")
+
+    # @.listenTo(@.model, 'blackjack', ->
+    #   render blackjack image)
+      #update $@el.imagediv with image
+      #update visibility to not be hidden
+      #render
+
+    @.listenTo(@.model, 'playerWin', ->
+      @$('.result').html("<img src='img/playerWin.jpg' />").css("visibility", "visible"))
+    @.listenTo(@.model, 'dealerWin', ->
+      @$('.result').html("<img src='img/dealerWin.jpg' />").css("visibility", "visible"))
+    @.listenTo(@.model, 'push', ->
+      @$('.result').html("<img src='img/push.png' />").css("visibility", "visible"))
+    @.listenTo(@.model, 'blackjack', ->
+      console.log 'blackjack'
+      @$('.result').html("<img src='img/blackjack.png' />").css("visibility", "visible"))
+
     @render()
 
   render: ->

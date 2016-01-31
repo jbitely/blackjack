@@ -9,15 +9,13 @@ class window.App extends Backbone.Model
       @dealerTurn()
       return), this
     @get('playerHand').on "busted", (->
-      @.trigger 'busted'
-      @declareWinner("Player", "dealer")
+      @declareWinner("dealer")
       return), this
     @get('playerHand').on "blackjack", (->
       @.trigger 'blackjack'
-      @declareWinner(false, "Player", true)
       return), this
     @get('dealerHand').on "busted", (->
-      @declareWinner("Dealer", "player")
+      @declareWinner("player")
       return), this
     return
 
@@ -35,20 +33,18 @@ class window.App extends Backbone.Model
 #  if over 21 player win
 #  else stand and determine winner
 #  else hit and recurse
-  declareWinner: (busted=false, winner=false, blackjack=false) ->
-    if blackjack
-      console.log "Blackjack! #{winner} wins!"
+  declareWinner: (winner=false) ->
     # did someone bust? other player wins
-    else if busted
-      console.log "#{busted} busted, #{winner} wins!"
-      # if busted is
+    if winner
+      #trigger winnner event
+      @.trigger("#{winner}Win")
     else
-      # declare winner
+      # determine winner
       dealScore = @get('dealerHand').minScore()
       playScore = @get('playerHand').minScore()
       if dealScore is playScore
-        console.log 'Push.'
+        @.trigger("push")
       else if dealScore > playScore
-        console.log 'Dealer wins!'
+        @.trigger("dealerWin")
       else
-        console.log 'Player wins!'
+        @.trigger("playerWin")
