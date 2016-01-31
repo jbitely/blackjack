@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/jbitely/2016-01-blackjack/issues"
   },
-  "homepage": "https://github.com/jbitely/2016-01-blackjack#readme"
+  "homepage": "https://github.com/jbitely/2016-01-blackjack#readme",
+  "dependencies": {
+    "sinon": "^1.17.3",
+    "sinon-chai": "^2.8.0"
+  }
 }

@@ -7,7 +7,9 @@ class window.Hand extends Backbone.Collection
       if !@isDealer and @.minScore() is 21 then @blackJack()
 
   hit: ->
-    @add(@deck.pop())
+    popped = @deck.pop()
+    @add(popped)
+    return popped
 
   hasAce: -> @reduce (memo, card) ->
     memo or card.get('value') is 1

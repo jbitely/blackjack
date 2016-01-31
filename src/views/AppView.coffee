@@ -12,8 +12,6 @@ class window.AppView extends Backbone.View
   initialize: ->
     #listen for dealerturn
     @.listenTo(@.model, 'dealerturn busted blackjack', ->
-      console.log 'heard player stand'
-      console.log @$el
       @$el.off "click .hit-button")
     @render()
 
